@@ -138,15 +138,15 @@ appropriate trigger engine. Watches that have a `schedule` trigger are
 registered with the `scheduler` trigger engine.
 
 The scheduler tracks time and triggers watches according to their schedules.
-On each node, that contains one of the `.watches` shards, a scheduler, that is
-bound to the watcher lifecycle runs. Even though all primaries and replicas are
-taken into account, when a watch is triggered, watcher also ensures, that each
-watch is only triggered on one of those shards. The more replica shards you
+On each node that contains one of the `.watches` shards, a scheduler that is
+bound to the watcher lifecycle runs. When a watch is triggered, watcher ensures that each
+watch is only triggered on one of those shards, with all primaries and replicas
+taken into account.  The more replica shards you
 add, the more distributed the watches can be executed. If you add or remove
 replicas, all watches need to be reloaded. If a shard is relocated, the
 primary and all replicas of this particular shard will reload.
 
-Because the watches are executed on the node, where the watch shards are, you can create
+Because watches are executed on the node where the watch shards are, you can create
 dedicated watcher nodes by using shard allocation filtering.
 
 You could configure nodes with a dedicated `node.attr.role: watcher` property and
